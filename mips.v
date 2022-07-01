@@ -6,7 +6,7 @@ input reset;
 
 wire [5:0] OpCode;
 
-wire [1:0] ALUOp;
+wire [3:0] ALUOp;
 
 wire RegDst;
 wire ALUSrc;
