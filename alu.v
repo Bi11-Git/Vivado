@@ -26,7 +26,7 @@ always @(ALUop, opA, opB) begin
 		5'b10010: result=opA>>>1; // srl
 		5'b10100: result=opA>>1;  // sra
 		5'b10110: result=opA<<opB; // sllv
-		5'b11000: result=opA>>opB; // srlv
+		5'b11001: result=opA>>opB; // srlv
 		5'b11010: result=~(opA-opB); // bne
 		5'b11100: result=(opA-opB)<=0?1:0; // blez
 		5'b11110: result=(opA-opB)>0?1:0; // bgtz
@@ -35,7 +35,6 @@ always @(ALUop, opA, opB) begin
 		5'b00011: result=(opA<<16); //lui 
 		5'b01110: result=opA<opB?1:0; //slt
 
-		5'b1100: result=~(opA|opB); //TODO - TI EINAI AFTO KAI GIA POU TO THELOOUME?
 	endcase
 end
 

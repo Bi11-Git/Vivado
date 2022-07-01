@@ -26,7 +26,7 @@ always@(AluOp or FnField)begin
         10'b1000_000010:AluCtrl=5'b10010; //srl
         10'b1000_000011:AluCtrl=5'b10100; //sra
         10'b1000_000100:AluCtrl=5'b10110; //sllv
-        10'b1000_000110:AluCtrl=5'b11000; //srlv
+        10'b1000_000110:AluCtrl=5'b11001; //srlv
 
         10'b1000_101010:AluCtrl=5'b01110; //slt
         10'b1000_010000:AluCtrl=5'b1111; //mfhi
