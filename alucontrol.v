@@ -5,7 +5,7 @@ input [3:0] AluOp;
 input [5:0] FnField; //for R-type instructions
 
 //Changed the size of the reg in order to satisfy our needs
-output reg [5:0] AluCtrl;
+output reg [4:0] AluCtrl;
 
 
 always@(AluOp or FnField)begin
