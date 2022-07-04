@@ -12,8 +12,8 @@ output zero; //1 if result is 0
 assign zero = (result==0);
 
 //The two registers we need for the multiplication and division that are not directly manipulated from the programmer.
-reg [31:0] hi
-reg [31:0] lo
+reg [31:0] hi;
+reg [31:0] lo;
 
 always @(ALUop, opA, opB) begin
 	case(ALUop)
@@ -58,7 +58,7 @@ always @(ALUop, opA, opB) begin
 		5'b00011: result=(opA<<16); //lui 
 		5'b01110: result=opA<opB?1:0; //slt
 
-		default: result=32'bx
+		default: result=32'bx;
 
 	endcase
 end
