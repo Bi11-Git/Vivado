@@ -1,9 +1,9 @@
-module datapath(clk, reset, RegDst,AluSrc,MemtoReg,RegWrite,MemRead,MemWrite,Branch,ALUOp,OpCode);
+module datapath(clk, reset, RegDst,AluSrc,MemtoReg,RegWrite,MemRead,MemWrite,Branch,Jump,ALUOp,OpCode);
 
 input clk;
 input reset;
 
-input RegDst,AluSrc,MemtoReg,RegWrite,MemRead,MemWrite,Branch;
+input RegDst,AluSrc,MemtoReg,RegWrite,MemRead,MemWrite,Branch,Jump;
 
 wire [31:0] Instruction;
 
@@ -30,6 +30,8 @@ wire [31:0] ReadData;
 wire [31:0] signExtend;
 
 wire PCsel;
+wire [31:0] PC_ad_branch;
+wire [31:0] PC_ad_jump;
 
 mem_async meminstr(PC_adr[7:0],Instruction); //Instruction memory
 mem_sync memdata(clk, ALUout[7:0], ReadData, ReadRegister2, MemRead, MemWrite); //Data memory
@@ -38,13 +40,17 @@ rf registerfile(clk,RegWrite,Instruction[25:21],Instruction[20:16],muxinstr_out,
 alucontrol AluControl(ALUOp, Instruction[5:0], ALUCtrl); //ALUControl
 alu Alu(ReadRegister1, muxalu_out, ALUCtrl, ALUout, Zero); //ALU
 
-pclogic PC(clk, reset, signExtend, PC_adr, PCsel); //generate PC
+pclogic PC(clk, reset, signExtend, PC_ad_branch, PCsel); //generate PC
 andm andPC(Branch, Zero, PCsel); //AndPC (branch & zero)
 signextend Signextend(signExtend, Instruction[15:0]); //Sign extend
+
+jump J(Instruction[25:0], PC_ad_branch[31:28], PC_ad_jump);
+
 
 mux #(5) muxinstr(RegDst, Instruction[20:16],Instruction[15:11],muxinstr_out);//MUX for Write Register
 mux #(32) muxalu(AluSrc, ReadRegister2, signExtend, muxalu_out);//MUX for ALU
 mux #(32) muxdata(MemtoReg, ALUout, ReadData, muxdata_out); //MUX for Data memory
+mux #(32) mux_jump(Jump, PC_ad_branch, PC_ad_jump, PC_adr); // MUX for jump instruction
 
 
 

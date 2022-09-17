@@ -1,0 +1,24 @@
+2009000a //addi $t1,$zero,10
+200a000a //addi $t2,$zero,10
+01495824 //and $t3, $t2, $t1
+01495825 //or $t3, $t2, $t1
+01495826 //xor $t3, $t2, $t1
+01495827 //nor $t3, $t2, $t1
+314b0064 //andi $t3, $t2, 100
+354b0064 //ori $t3, $t2, 100
+394b0064 //xori $t3, $t2, 100
+01495820 //add $t3, $t2, $t1
+214b0064 //addi $t3, $t2, 100
+01495822 //sub $t3, $t2, $t1
+01490018 //mult $t2, $t1
+0149001a //div $t2, $t1
+000a5880 //sll $t3, $t2, 2
+000a5882 //srl $t3, $t2, 2
+000a5883 //sra $t3, $t2, 2
+012a5804 //sllv $t3, $t2, $t1
+012a5806 //srlv $t3, $t2, $t1
+200b003f //addi $t3,$zero,63 --add 63 to t3
+08100016 //j a --jump next instruction
+200b0000 //addi $t3,$zero,0 --add 0 to t3
+10000001 //beq $zero,$zero,b --if equal jump next instruction
+200b0000 //addi $t3,$zero,0 --add 0 to t3
