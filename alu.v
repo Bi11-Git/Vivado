@@ -12,8 +12,8 @@ output zero; //1 if result is 0
 assign zero = (result==0);
 
 //The two registers we need for the multiplication and division that are not directly manipulated from the programmer.
-reg [31:0] hi;
-reg [31:0] lo;
+reg [31:0] hi
+reg [31:0] lo
 
 always @(ALUop, opA, opB) begin
 	case(ALUop)
@@ -26,10 +26,6 @@ always @(ALUop, opA, opB) begin
 		5'b01100: result=opA-opB; // sub
 		//Now when we multiply and divide its not that easy we need two registers, $HI and $LO
 		/* 
-			Trick RULE -> If you try to read a value from HI and/or LO, you must wait at least two instructions before
-			performing any operation that writes to hi or lo. Otherwise, the reads will produce gabage.
-		*/
-		/* 
 		 - mult
 		 - multiplication of two unsigned integers.
 		 - Upper 32 bits stored in special register hi and the Lower 32 bits stored in special register lo 
@@ -40,7 +36,6 @@ always @(ALUop, opA, opB) begin
 		 - division of two unsigned integers.
 		 - Remainder stored in special register hi and quotient stored in the special register lo.
 		*/
-		//TODO - chack for divitsion with zero it needs to be done explicitly.
 		5'b01010: assign {hi, lo}=opA/opB;
 
 		5'b10000: result=opA<<<1; // sll
@@ -58,7 +53,7 @@ always @(ALUop, opA, opB) begin
 		5'b00011: result=(opA<<16); //lui 
 		5'b01110: result=opA<opB?1:0; //slt
 
-		default: result=32'bx;
+		default: result=32'bx
 
 	endcase
 end

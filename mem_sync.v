@@ -24,6 +24,6 @@ always @(posedge clk) begin
 
 end
 
-initial $readmemh("/home/logikisxediasi/Desktop/Vivado/memdata.dat", memory); 
+initial $readmemh("meminstr.dat", memory); 
 
 endmodule

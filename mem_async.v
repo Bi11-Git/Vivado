@@ -10,6 +10,6 @@ output [(S-1):0] d;
 reg [S-1:0] memory [L-1:0]; //Attention: Word not byte addressable
 assign d=memory[a];
 //when we do a+1 we are not moving to the next byte but we are moving to the next word, that means 4 bytes at a times
-initial $readmemh("/home/logikisxediasi/Desktop/Vivado/instr.dat", memory);
+initial $readmemh("meminstr.dat", memory);
 
 endmodule

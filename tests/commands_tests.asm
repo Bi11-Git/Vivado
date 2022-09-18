@@ -1,5 +1,3 @@
- .data
-    var1:      .word      5
 .text
 .global main
 main:
